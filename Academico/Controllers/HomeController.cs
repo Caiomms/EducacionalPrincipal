@@ -24,7 +24,7 @@ namespace Academico.Controllers
         }
         public IActionResult Teste()
         {
-            ViewData["Nome"] = "Seu nome";
+            ViewData["Nome"] = "Seu nomes";
             return View();
         }
         public IActionResult Sobre()
