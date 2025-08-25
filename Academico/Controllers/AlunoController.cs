@@ -17,8 +17,21 @@ namespace Academico.Controllers
         [HttpPost]
         public IActionResult Create(Aluno aluno)
         {
-            _alunos.Add(aluno);
-            return RedirectToAction("Index");
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    aluno.AlunoId = _alunos.Select(a => a.AlunoId).DefaultIfEmpty(0).Max() + 1;
+                    _alunos.Add(aluno);
+                    return RedirectToAction("Index");
+                }
+                return View(aluno);
+            }
+            catch
+            {
+                return View(aluno);
+            }
         }
 
     }
