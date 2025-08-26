@@ -34,5 +34,67 @@ namespace Academico.Controllers
             }
         }
 
+        public IActionResult Edit(int id)
+        {
+            var aluno = _alunos.FirstOrDefault(a => a.AlunoId == id);
+            if (aluno == null) 
+            {
+                return NotFound();
+            }
+            return View(aluno);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Aluno aluno)
+        {
+            if(ModelState.IsValid)
+            {
+                _alunos.Remove(_alunos.Where(a => a.AlunoId == aluno.AlunoId).First());
+                _alunos.Add(aluno);
+                return RedirectToAction("Index");
+            }
+            return View(aluno);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var aluno = _alunos.FirstOrDefault(a => a.AlunoId == id);
+            if (aluno == null)
+            {
+                return NotFound();
+            }
+            return View(aluno);
+        }
+        public IActionResult Delete(int id)
+        {
+            var aluno = _alunos.FirstOrDefault(a => a.AlunoId == id);
+            if (aluno == null)
+            {
+                return NotFound();
+            }
+            return View(aluno);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            try
+            {
+                var aluno = _alunos.FirstOrDefault(a => a.AlunoId == id);
+                if(aluno == null)
+                {
+                    return NotFound();
+                }
+                _alunos.Remove(aluno);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                
+            }
+            return RedirectToAction("Index");
+        }
     }
 }
