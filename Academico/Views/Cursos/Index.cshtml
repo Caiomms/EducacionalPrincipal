@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Academico.Models.Departamento>
+﻿@model IEnumerable<Academico.Models.Cursos>
 
 @{
     ViewData["Title"] = "Listagem";
 }
 
-<h1>Listagem de Departamentos</h1>
+<h1>Listagem</h1>
 
 <p>
     <a asp-action="Create">Criar Novo</a>
@@ -16,7 +16,10 @@
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Instituicao)
+                @Html.DisplayNameFor(model => model.CargaHoraria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departamento)
             </th>
             <th></th>
         </tr>
@@ -28,7 +31,10 @@
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Instituicao.Nome)
+                @Html.DisplayFor(modelItem => item.CargaHoraria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departamento.Nome)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |

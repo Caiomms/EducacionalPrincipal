@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Academico.Data;
 using Academico.Models;
 
+
 namespace Academico.Controllers
 {
     public class InstituicaoController : Controller
@@ -54,6 +55,7 @@ namespace Academico.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> Create([Bind("InstituicaoID,Nome,Telefone")] Instituicao instituicao)
         {
             if (ModelState.IsValid)
@@ -61,6 +63,7 @@ namespace Academico.Controllers
                 _context.Add(instituicao);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+                
             }
             return View(instituicao);
         }

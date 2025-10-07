@@ -48,7 +48,7 @@ namespace Academico.Controllers
         // GET: Departamento/Create
         public IActionResult Create()
         {
-            ViewData["InstituicaoID"] = new SelectList(_context.Instituicoes, "InstituicaoID", "InstituicaoID");
+            ViewData["InstituicaoID"] = new SelectList(_context.Instituicoes, "InstituicaoID", "Nome");
             return View();
         }
 
@@ -65,7 +65,7 @@ namespace Academico.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstituicaoID"] = new SelectList(_context.Instituicoes, "InstituicaoID", "InstituicaoID", departamento.InstituicaoID);
+            ViewData["InstituicaoID"] = new SelectList(_context.Instituicoes, "InstituicaoID", "Nome", departamento.InstituicaoID);
             return View(departamento);
         }
 
@@ -82,7 +82,7 @@ namespace Academico.Controllers
             {
                 return NotFound();
             }
-            ViewData["InstituicaoID"] = new SelectList(_context.Instituicoes, "InstituicaoID", "InstituicaoID", departamento.InstituicaoID);
+            ViewData["InstituicaoID"] = new SelectList(_context.Instituicoes, "InstituicaoID", "Nome", departamento.InstituicaoID);
             return View(departamento);
         }
 
