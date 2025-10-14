@@ -10,22 +10,22 @@ using Academico.Models;
 
 namespace Academico.Controllers
 {
-    public class AlunoController : Controller
+    public class AlunosController : Controller
     {
         private readonly EducacionalContext _context;
 
-        public AlunoController(EducacionalContext context)
+        public AlunosController(EducacionalContext context)
         {
             _context = context;
         }
 
-        // GET: Aluno
+        // GET: Alunos
         public async Task<IActionResult> Index()
         {
             return View(await _context.Alunos.ToListAsync());
         }
 
-        // GET: Aluno/Details/5
+        // GET: Alunos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -43,18 +43,18 @@ namespace Academico.Controllers
             return View(aluno);
         }
 
-        // GET: Aluno/Create
+        // GET: Alunos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Aluno/Create
+        // POST: Alunos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AlunoId,Nome,Email,Cep")] Aluno aluno)
+        public async Task<IActionResult> Create([Bind("AlunoId,Nome,Email,Telefone,Endereco,Complemento,Bairro,Municipio,Uf,Cep")] Aluno aluno)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace Academico.Controllers
             return View(aluno);
         }
 
-        // GET: Aluno/Edit/5
+        // GET: Alunos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -81,12 +81,12 @@ namespace Academico.Controllers
             return View(aluno);
         }
 
-        // POST: Aluno/Edit/5
+        // POST: Alunos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AlunoId,Nome,Email,Cep")] Aluno aluno)
+        public async Task<IActionResult> Edit(int id, [Bind("AlunoId,Nome,Email,Telefone,Endereco,Complemento,Bairro,Municipio,Uf,Cep")] Aluno aluno)
         {
             if (id != aluno.AlunoId)
             {
@@ -116,7 +116,7 @@ namespace Academico.Controllers
             return View(aluno);
         }
 
-        // GET: Aluno/Delete/5
+        // GET: Alunos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +134,7 @@ namespace Academico.Controllers
             return View(aluno);
         }
 
-        // POST: Aluno/Delete/5
+        // POST: Alunos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

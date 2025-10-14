@@ -14,5 +14,6 @@ namespace Academico.Models
 
         [DisplayName("Instituição")]
         public long InstituicaoID { get; set; }
+
     }
 }

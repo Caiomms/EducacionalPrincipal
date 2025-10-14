@@ -29,7 +29,15 @@ namespace Academico.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AlunoId"));
 
+                    b.Property<string>("Bairro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Complemento")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -37,13 +45,44 @@ namespace Academico.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Endereco")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Municipio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Uf")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AlunoId");
 
                     b.ToTable("Alunos");
+                });
+
+            modelBuilder.Entity("Academico.Models.CursoDisciplina", b =>
+                {
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DisciplinaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CursoId", "DisciplinaId");
+
+                    b.HasIndex("DisciplinaId");
+
+                    b.ToTable("CursoDisciplinas");
                 });
 
             modelBuilder.Entity("Academico.Models.Cursos", b =>
@@ -93,6 +132,26 @@ namespace Academico.Migrations
                     b.ToTable("Departamentos");
                 });
 
+            modelBuilder.Entity("Academico.Models.Disciplina", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CargaHoraria")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Disciplinas");
+                });
+
             modelBuilder.Entity("Academico.Models.Instituicao", b =>
                 {
                     b.Property<long>("InstituicaoID")
@@ -112,6 +171,25 @@ namespace Academico.Migrations
                     b.HasKey("InstituicaoID");
 
                     b.ToTable("Instituicoes");
+                });
+
+            modelBuilder.Entity("Academico.Models.CursoDisciplina", b =>
+                {
+                    b.HasOne("Academico.Models.Cursos", "Cursos")
+                        .WithMany("CursosDisciplinas")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Academico.Models.Disciplina", "Disciplina")
+                        .WithMany("CursosDisciplinas")
+                        .HasForeignKey("DisciplinaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cursos");
+
+                    b.Navigation("Disciplina");
                 });
 
             modelBuilder.Entity("Academico.Models.Cursos", b =>
@@ -134,6 +212,16 @@ namespace Academico.Migrations
                         .IsRequired();
 
                     b.Navigation("Instituicao");
+                });
+
+            modelBuilder.Entity("Academico.Models.Cursos", b =>
+                {
+                    b.Navigation("CursosDisciplinas");
+                });
+
+            modelBuilder.Entity("Academico.Models.Disciplina", b =>
+                {
+                    b.Navigation("CursosDisciplinas");
                 });
 #pragma warning restore 612, 618
         }
