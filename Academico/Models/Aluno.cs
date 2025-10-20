@@ -26,7 +26,5 @@ namespace Academico.Models
         [Required(ErrorMessage = "O CEP é obrigatório")]
         [RegularExpression(@"^\d{5}-\d{3}$", ErrorMessage = "O CEP deve estar no formato 99999-999")]
         public string Cep { get; set; }
-
-        public ICollection<AlunoDisiciplina> AlunoDisciplinas { get; set; }
     }
 }
